@@ -30,10 +30,7 @@ gives:
 
 All units are converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
-The `get_historical_data()` method can get data beginning from a certain data (going back a few weeks) and also supports a callback function which will be passed the above dictionary for every record.
-
-json_data.pop('version')
-
+The `get_historical_data()` method can get data beginning from a certain date (going back a few weeks) and supports a callback function which will be passed the above dictionary for every record.
 
 # Credit
 
