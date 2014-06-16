@@ -5,7 +5,7 @@ all units to SI.
 
 # Note
 
-This uses an unofficial and completely unsupported API that can (and has) change at any moment, so try not to abuse it.
+This uses an unofficial and completely unsupported API that can (and has in the past) change at any moment, so try not to abuse it.
 Also there are two unknown fields (`unknown1` and `unknown2`) which don't seem important (they're usually zero), but
 are still returned.
 
@@ -35,7 +35,7 @@ gives:
 
 All units are converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
-The `get_historical_data()` function can get data from a given time span (going back a few weeks). It supports a callback function which will be passed the above dictionary for every record and can also be used to filter each record by return `True`/`False` if it should be retained.
+The `get_historical_data()` function can get data from a given time span (going back a few weeks). It supports a callback function which will be passed the above dictionary for every record and can also be used to filter each record by returning `True`/`False` if it should be retained.
 
 `get_last_data()` is a helper function that accepts a Python `timedelta` object specifying the time span of data to retrieve, beginning from the current date and time.
 
