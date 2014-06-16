@@ -5,7 +5,7 @@ all units to SI.
 
 # Note
 
-This uses an unofficial API that can (and has) change at any moment, so try not to abuse it.
+This uses an unofficial and completely unsupported API that can (and has) change at any moment, so try not to abuse it.
 Also there are two unknown fields (`unknown1` and `unknown2`) which don't seem important, but
 are still returned.
 
@@ -31,3 +31,10 @@ gives:
 All units are converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
 The `get_historical_data()` method can get data beginning from a certain data (going back a few weeks) and also supports a callback function which will be passed the above dictionary for every record.
+
+json_data.pop('version')
+
+
+# Credit
+
+This is based on some code by @palli found [here](https://github.com/palli/monitor-iceland/blob/master/scripts/dataminers/flightradar24.com.py).
