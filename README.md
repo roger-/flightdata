@@ -28,6 +28,6 @@ gives:
 {'src': 'HGH', 'squawk': '1306', 'track': 253, 'type': 'A333', 'icao_addr': '78012D', 'reg_num': 'B-HLJ', 'long': 115.46, 'unknown2': 0, 'dest': 'HKG', 'radar': 'T-VHHH21', 'unknown1': 0, 'callsign': 'HDA623', 'time': datetime.datetime(2014, 6, 15, 20, 35, 23), 'flight_num': 'KA623', 'lat': 22.62, 'alt': 8092.4400000000005, 'time_epoch': 1402882523, 'speed': 240.759999792, 'id': '395791a', 'vert_speed': -12.354560000000001}
 ```
 
-All units are converted to SI (m and m/s) and a list of zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
+All units are converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
 The `get_historical_data()` method can get data beginning from a certain data (going back a few weeks) and also supports a callback function which will be passed the above dictionary for every record.
