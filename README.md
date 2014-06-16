@@ -9,6 +9,11 @@ This uses an unofficial and completely unsupported API that can (and has) change
 Also there are two unknown fields (`unknown1` and `unknown2`) which don't seem important (they're usually zero), but
 are still returned.
 
+# Requirements
+
+* Python 2.7 (3.x may also work)
+* [requests](http://docs.python-requests.org/en/latest/)
+
 # Usage
 
 Sample usage:
