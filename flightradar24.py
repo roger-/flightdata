@@ -32,14 +32,16 @@ def get_historical_data(date_start, date_stop, step=TIME_RES_HISTORICAL, callbac
 
     data = []
     date_cur = date_start
+    keep_results = True
 
     while date_cur < date_stop:
         url = date_cur.strftime(URL_JSON_HISTORICAL)
         data_cur = load_data(url)
 
         if callback:
-            callback(data_cur)
-        else:
+            keep_results = callback(data_cur)
+            
+        if keep_results:
             data.extend(data_cur)
 
         date_cur += step
