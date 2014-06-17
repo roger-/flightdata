@@ -6,7 +6,7 @@ import json
 import datetime
 
 
-__all__ = ['get_historical_data', 'get_last_data', 'get_current_data', \
+__all__ = ['iter_historical_data', 'iter_recent_data', 'get_current_data', \
            'TIME_RES_HISTORICAL', 'TIME_RES_CURRENT']
 
 FIELDS = 'icao_addr', 'lat', 'long', 'track', 'alt', 'speed', 'squawk', 'radar', \
