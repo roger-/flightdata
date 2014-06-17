@@ -22,7 +22,7 @@ Sample usage:
 from flightradar import get_current_data
 
 zone = 'full' # downloads current data for every tracked flight in the world!
-data = get_current_data(zone) 
+data = get_current_data(zone)
 
 print data[0] # ranges in the thousands (e.g. 7,000+) so just print the first flight
 ```
@@ -35,9 +35,9 @@ gives:
 
 All units are converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
-The `get_historical_data()` function can get data from a given time span (going back a few weeks). It supports a callback function which will be passed the above dictionary for every record and can also be used to filter each record by returning `True`/`False` if it should be retained.
+The `iter_historical_data()` function will get data from a given time span (going back a few weeks) and return a iterator over (datetime, data).
 
-`get_last_data()` is a helper function that accepts a Python `timedelta` object specifying the time span of data to retrieve, beginning from the current date and time.
+`iter_recent_data()` is a helper that does the same for a given time span, beginning from the current date and time.
 
 
 # Credit

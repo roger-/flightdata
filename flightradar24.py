@@ -26,33 +26,23 @@ CONV_FPM_TO_MPS = 5.08e-3
 CONV_FT_TO_M = 0.3048
 
 
-def get_historical_data(date_start, date_stop, step=TIME_RES_HISTORICAL, callback=None):
+def iter_historical_data(date_start, date_stop, step=TIME_RES_HISTORICAL):
     if date_stop < date_start:
         raise Exception('stop date is before start date')
 
-    data = []
     date_cur = date_start
-    keep_results = True
 
     while date_cur < date_stop:
         url = date_cur.strftime(URL_JSON_HISTORICAL)
-        data_cur = load_data(url)
-
-        if callback:
-            keep_results = callback(data_cur)
-            
-        if keep_results:
-            data.extend(data_cur)
+        yield date_cur, load_data(url)
 
         date_cur += step
 
-    return data
-
-def get_last_data(time_span, step=TIME_RES_HISTORICAL, callback=None):
+def iter_recent_data(time_span, step=TIME_RES_HISTORICAL):
     stop = datetime.datetime.now()
     start = stop - time_span
 
-    return get_historical_data(start, stop, step=step, callback=callback)
+    return iter_historical_data(start, stop, step=step)
 
 def get_current_data(zone_name='full', use_faa=True):
     if use_faa and not zone_name.endswith('_all'):
@@ -102,12 +92,17 @@ def load_data(url, convert=True):
 
 def main():
     zone = 'full'
-
     data = get_current_data(zone)
 
     print data[0]
     print len(data)
 
+    span = datetime.timedelta(minutes=10)
+    iter = iter_recent_data(span)
+
+    for date, data in iter:
+        print 'date:', date
+        print 'num records:', len(data)
 
 if __name__ == '__main__':
     main()
