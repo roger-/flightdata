@@ -28,23 +28,22 @@ def logger(file_name, time_span, coord, radius):
     Log flights records going back `time_span` (`timedelta` object) to `file_name`
     if flight is within `radius` meters of coordate  `coord` (latitude, longitude).
     '''
+    def is_within_radius(rec):
+        coord_rec = rec['lat'], rec['long']
+        dist = distance(coord_rec, coord)
+
+        return dist <= radius
+
     data_gen = flightradar24.get_recent(time_span)
+    data_filtered = (rec for rec in data_gen if is_within_radius(rec))
 
-    def filter_distance(gen):
-        for rec in gen:
-            coord_rec = rec['lat'], rec['long']
-            dist = distance(coord_rec, coord)
-
-            if dist <= radius:
-                yield rec
-
-    flightradar24.log_to_csv(file_name, filter_distance(data_gen), print_every=10)
+    flightradar24.log_to_csv(file_name, data_filtered, print_every=10)
 
 
 if __name__ == '__main__':
-    time_span = datetime.timedelta(minutes=60)
+    time_span = datetime.timedelta(minutes=5)
     coord = (35, -39) # Atlantic ocean
-    radius = 10e3 # 10 km
-    file_name = 'flightss.csv'
+    radius = 1000e3 # 1000 km
+    file_name = 'flights.csv'
 
     logger(file_name, time_span, coord, radius)

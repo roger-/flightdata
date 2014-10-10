@@ -122,14 +122,14 @@ def log_to_csv(file_name, data_gen, print_every=1000):
 
         print 'logging to file {}...'.format(file_name)
 
+        i = -1
         for i, record in enumerate(data_gen):
             writer.writerow(record)
 
-            if i > 0 and (i % print_every) == 0:
+            if (i % print_every) == 0:
                 print ' wrote {} records'.format(i + 1)
 
-    print ' wrote {} records'.format(i + 1)
-    print 'done'
+    print 'done with {} total records written'.format(i + 1)
 
 def main():
     zone = 'full'
