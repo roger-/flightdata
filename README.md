@@ -21,10 +21,10 @@ Sample usage:
 ```python
 from flightradar import get_current_data
 
-zone = 'full' # downloads current data for every tracked flight in the world!
-data = get_current_data(zone)
+zone = 'full' # gets current data for every tracked flight in the world!
+data = get_current(zone)
 
-print data[0] # ranges in the thousands (e.g. 7,000+) so just print the first flight
+print data.next() # ranges in the thousands (e.g. 7,000+) so just print the first flight
 ```
 
 gives:
@@ -33,11 +33,15 @@ gives:
 {'src': 'HGH', 'squawk': '1306', 'track': 253, 'type': 'A333', 'icao_addr': '78012D', 'reg_num': 'B-HLJ', 'long': 115.46, 'unknown2': 0, 'dest': 'HKG', 'radar': 'T-VHHH21', 'unknown1': 0, 'callsign': 'HDA623', 'time': datetime.datetime(2014, 6, 15, 20, 35, 23), 'flight_num': 'KA623', 'lat': 22.62, 'alt': 8092.4400000000005, 'time_epoch': 1402882523, 'speed': 240.759999792, 'id': '395791a', 'vert_speed': -12.354560000000001}
 ```
 
-All units are converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
+All units are (optionally) converted to SI (m and m/s) and time stamps are made available as Python `datetime` objects.
 
-The `iter_historical_data()` function will get data from a given time span (going back a few weeks) and return a iterator over (datetime, data).
+## API
 
-`iter_recent_data()` is a helper that does the same for a given time span, beginning from the current date and time.
+* `get_historical()` will get data from a given time span (going back a few weeks) and return an iterator yielding dictionaries as above.
+
+* `get_recent()` is a helper that does the same for a given time span, beginning from the current date and time.
+
+* `get_current()` returns all the current data for a given zone. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
 
 # Credit
