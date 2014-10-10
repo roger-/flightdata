@@ -26,7 +26,7 @@ def distance(origin, destination):
 def logger(file_name, time_span, coord, radius):
     '''
     Log flights records going back `time_span` (`timedelta` object) to `file_name`
-    if flight is within `radius` meters of coordate  `coord` (latitude, longitude).
+    if flight is within `radius` meters of coordinate  `coord` (latitude, longitude).
     '''
     def is_within_radius(rec):
         coord_rec = rec['lat'], rec['long']
