@@ -1,6 +1,6 @@
 A Python library to download data from [flightradar24.com](http://www.flightradar24.com/).
 
-Supports downloading both archived ("playback") as well as "real-time" data, and will convert
+Supports downloading both archived ("playback") as well as "real-time" data, and can convert
 all units to SI.
 
 # Note
@@ -19,10 +19,10 @@ are still returned.
 Sample usage:
 
 ```python
-from flightradar import get_current_data
+import flightradar
 
 zone = 'full' # gets current data for every tracked flight in the world!
-data = get_current(zone)
+data = flightradar.get_current(zone)
 
 print data.next() # ranges in the thousands (e.g. 7,000+) so just print the first flight
 ```
