@@ -6,13 +6,14 @@ import json
 import datetime
 
 
-__all__ = ['get_historical', 'get_recent', 'get_current', \
+__all__ = ['get_historical', 'get_recent', 'get_current', 'log_to_csv', \
            'TIME_RES_HISTORICAL', 'TIME_RES_CURRENT', 'FIELDS']
 
 FIELDS = 'icao_addr', 'lat', 'long', 'track', 'alt', 'speed', 'squawk', 'radar', \
          'type', 'reg_num', 'time_epoch', 'src', 'dest', 'flight_num', 'unknown1', \
          'vert_speed', 'callsign', 'unknown2'
 # unknown1 sometimes == '1', usually == '0'
+FIELDS_EXTRA = 'time', 'id'
 
 URL_JSON_CURRENT = "http://db8.flightradar24.com/zones/{zone_name}.js"
 URL_JSON_HISTORICAL = 'http://db.flightradar24.com/playback/%Y%m%d/%H%M00.js'
@@ -108,6 +109,27 @@ def get_current(zone_name='full', use_faa=True, convert=True):
 
     return load_url(url, convert=convert)
 
+def log_to_csv(file_name, data_gen, print_every=1000):
+    '''
+    Log data from `data_gen` into CSV file `file_name`.
+    Status will be printed after every `print_every` rows are written.
+    '''
+    import csv
+
+    with open(file_name, "wb") as out_file:
+        writer = csv.DictWriter(out_file, delimiter=',', fieldnames=FIELDS + FIELDS_EXTRA)
+        writer.writeheader()
+
+        print 'logging to file {}...'.format(file_name)
+
+        for i, record in enumerate(data_gen):
+            writer.writerow(record)
+
+            if i > 0 and (i % print_every) == 0:
+                print ' wrote {} records'.format(i + 1)
+
+    print ' wrote {} records'.format(i + 1)
+    print 'done'
 
 def main():
     zone = 'full'
