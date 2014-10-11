@@ -30,7 +30,7 @@ CONV_FT_TO_M = 0.3048
 def load_url(url, convert=True):
     '''
     Load and parse flight data from given Flightradar24 data URL.
-    `convert` parameter will use convert all values to SI.
+    `convert` parameter will convert all values to SI when True.
     Returns an iterator yielding dictionaries with flight information.
     '''
     content = requests.get(url).content
@@ -68,7 +68,7 @@ def load_url(url, convert=True):
 def get_historical(date_start, date_stop, step=TIME_RES_HISTORICAL, convert=True):
     '''
     Get flight records between `date_start` and `date_stop` (both `datetime` objects).
-    `step` is the desired increment and defaults to the estimated Flightradar24 resolution.
+    `step` is the desired increment and defaults to the (estimated) Flightradar24 resolution.
     Returns an iterator.
     '''
 
@@ -87,7 +87,7 @@ def get_historical(date_start, date_stop, step=TIME_RES_HISTORICAL, convert=True
 
 def get_recent(time_span, step=TIME_RES_HISTORICAL, convert=True):
     '''
-    Get flight records going back `time_span` (timedelta object) to current date.
+    Get flight records going back `time_span` (`timedelta` object) to current date.
     `step` is the desired increment and defaults to the estimated Flightradar24 resolution.
     Returns an iterator.
     '''
