@@ -6,8 +6,8 @@ import json
 import datetime
 
 
-__all__ = ['get_historical', 'get_recent', 'get_current', 'log_to_csv', \
-           'TIME_RES_HISTORICAL', 'TIME_RES_CURRENT', 'FIELDS']
+__all__ = ['get_historical', 'get_recent', 'get_current', \
+           'TIME_RES_HISTORICAL', 'TIME_RES_CURRENT', 'FIELDS', 'FIELDS_EXTRA']
 
 FIELDS = 'icao_addr', 'lat', 'long', 'track', 'alt', 'speed', 'squawk', 'radar', \
          'type', 'reg_num', 'time_epoch', 'src', 'dest', 'flight_num', 'unknown1', \
@@ -108,28 +108,6 @@ def get_current(zone_name='full', use_faa=True, convert=True):
     url = URL_JSON_CURRENT.format(zone_name=zone_name)
 
     return load_url(url, convert=convert)
-
-def log_to_csv(file_name, data_gen, print_every=1000):
-    '''
-    Log data from `data_gen` into CSV file `file_name`.
-    Status will be printed after every `print_every` rows are written.
-    '''
-    import csv
-
-    with open(file_name, "wb") as out_file:
-        writer = csv.DictWriter(out_file, delimiter=',', fieldnames=FIELDS + FIELDS_EXTRA)
-        writer.writeheader()
-
-        print 'logging to file {}...'.format(file_name)
-
-        i = -1
-        for i, record in enumerate(data_gen):
-            writer.writerow(record)
-
-            if (i % print_every) == 0:
-                print ' wrote {} records'.format(i + 1)
-
-    print 'done with {} total records written'.format(i + 1)
 
 def main():
     zone = 'full'

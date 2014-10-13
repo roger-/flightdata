@@ -43,7 +43,7 @@ All units are (optionally) converted to SI (m and m/s) and time stamps are made 
 
 * `get_current()` returns all the current data for a given zone. A list of supported zones can be found [here](http://www.flightradar24.com/js/zones.js.php).
 
-* `log_to_csv()` is a basic function to log data from an iterator to a CSV file. See logger.py for an example.
+Also see logger.py for some CSV logging functionality.
 
 # Credit
 
