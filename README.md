@@ -1,3 +1,9 @@
+# Notice
+
+This is currently broken due to an API change (see issue #1). Hopefully I or someone else will get around to updating it soon.
+
+---
+
 A Python library to download data from [flightradar24.com](http://www.flightradar24.com/).
 
 Supports downloading both archived ("playback") as well as "real-time" data, and can convert
